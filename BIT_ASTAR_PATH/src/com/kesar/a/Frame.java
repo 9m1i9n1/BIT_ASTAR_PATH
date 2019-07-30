@@ -83,7 +83,7 @@ public class Frame extends JFrame {
 						event.setBackground(new Color(42, 179, 231));
 						event.setText("[벽]");
 						map[i][j] = 1;
-					}
+					}					
 					solve();
 				}
 			}
@@ -111,6 +111,14 @@ public class Frame extends JFrame {
 		info = new MapInfo(map, row, col, start, end);
 		new AStar().start(info);
 		printMap(info.maps);
+		
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				if (map[i][j] == 2) {
+					map[i][j] = 0;
+				}
+			}
+		}
 	}
 
 	public static void printMap(int[][] maps) {
