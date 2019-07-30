@@ -39,11 +39,15 @@ public class AStar {
 	 * 노드 이동
 	 */
 	private void moveNodes(MapInfo mapInfo) {
-		while (!openList.isEmpty()) {
+		while (true) {
 			// 만약 CloseList에 EndPoint가 있나?
 			if (isCoordInClose(mapInfo.end.coord)) {
 				// 있으면 맵 출력하고 탈출함.
 				drawPath(mapInfo.maps, mapInfo.end);
+				break;
+			}
+			
+			if (openList.isEmpty()) {
 				break;
 			}
 
