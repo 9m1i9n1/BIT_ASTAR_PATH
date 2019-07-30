@@ -59,13 +59,6 @@ public class Frame extends JFrame {
 				add(btn[i][j]);
 			}
 		}
-
-		btn[0][0].setBackground(Color.red);
-		btn[0][0].setText("[출발지]");
-		btn[0][0].setEnabled(false);
-		btn[9][9].setBackground(Color.red);
-		btn[9][9].setText("[도착지]");
-		btn[9][9].setEnabled(false);
 	}
 
 	public ActionListener btn_listner(int i, int j) {
@@ -73,15 +66,15 @@ public class Frame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//액션주기전에 Map초기화
-				for (int i = 0; i < row; i++) {
-					for (int j = 0; j < col; j++) {
-						if (map[i][j] == 2) {
-							map[i][j] = 0;
-							btn[i][j].setBackground(null);
-						}
-					}
-				}
+//				//액션주기전에 Map초기화
+//				for (int i = 0; i < row; i++) {
+//					for (int j = 0; j < col; j++) {
+//						if (map[i][j] == 2) {
+//							map[i][j] = 0;
+//							btn[i][j].setBackground(null);
+//						}
+//					}
+//				}
 				
 				if (e.getSource() instanceof JButton) {
 					JButton event = (JButton) e.getSource();
@@ -119,7 +112,7 @@ public class Frame extends JFrame {
 	}
 	
 	public void solve() {
-		info = new MapInfo(map, row, col, start, end);
+		info = new MapInfo(deepCopy(map), row, col, start, end);
 		new AStar().start(info);
 		System.out.println("----------------");
 		printMap(info.maps);
@@ -127,12 +120,33 @@ public class Frame extends JFrame {
 		//벽 색깔 칠해주기
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
-				if (map[i][j] == 2) {
+				if (info.maps[i][j] == 2) {
 					btn[i][j].setBackground(Color.green);
+				}
+				else if (info.maps[i][j] == 0){
+					btn[i][j].setBackground(null);
 				}
 			}
 		}
+		
+		btn[0][0].setBackground(Color.red);
+		btn[0][0].setText("[출발지]");
+		btn[0][0].setEnabled(false);
+		btn[9][9].setBackground(Color.red);
+		btn[9][9].setText("[도착지]");
+		btn[9][9].setEnabled(false);
 	}
+	
+	private static int[][] deepCopy(int[][] arr) {
+        if(arr == null) return null;
+        int[][] result = new int[arr.length][arr[0].length];
+         
+        for(int i=0; i<arr.length; i++){
+            System.arraycopy(arr[i], 0, result[i], 0, arr[0].length);
+        }
+         
+        return result;
+    }
 
 	public void printMap(int[][] maps) {
 		for (int i = 0; i < maps.length; i++) {
