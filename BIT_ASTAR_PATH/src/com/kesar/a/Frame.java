@@ -73,6 +73,7 @@ public class Frame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//액션주기전에 Map초기화
 				for (int i = 0; i < row; i++) {
 					for (int j = 0; j < col; j++) {
 						if (map[i][j] == 2) {
@@ -122,6 +123,7 @@ public class Frame extends JFrame {
 		new AStar().start(info);
 		printMap(info.maps);
 		
+		//벽 색깔 칠해주기
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				if (map[i][j] == 2) {
