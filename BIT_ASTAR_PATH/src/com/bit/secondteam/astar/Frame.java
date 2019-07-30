@@ -5,8 +5,6 @@ import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,10 +19,13 @@ public class Frame extends JFrame {
 	private Node end;
 	private MapInfo info;
 
+	//=================
+	
 	private int[][] map;
 	private JButton btn[][];
-	private ArrayList<JButton> colored;
 
+	//=================
+	
 	public Frame(int row, int col, Node start, Node end) {
 
 		this.row = row;
@@ -40,6 +41,7 @@ public class Frame extends JFrame {
 		setView();
 	}
 
+	// Frame 생성
 	public void initFrame() {
 		setTitle("2조 - A* 알고리즘 길 찾기");
 		setSize(600, 600);
@@ -49,33 +51,39 @@ public class Frame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	// Layout에 버튼 배치
 	public void initButton() {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				btn[i][j] = new JButton("");
+				btn[i][j].setBackground(Color.white);
 				btn[i][j].setBorder(new LineBorder(Color.LIGHT_GRAY));
 				btn[i][j].addActionListener(btn_listner(i, j));
 				btn[i][j].setFocusable(false);
 				add(btn[i][j]);
 			}
 		}
+		pointButtonColored();
 	}
 
+	// 버튼 액션리스너
 	public ActionListener btn_listner(int i, int j) {
-		
 		ActionListener listener = new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() instanceof JButton) {
 					JButton event = (JButton) e.getSource();
-					if (event.getText() == "■") {
-						event.setBackground(null);
+					// 벽을 만드는 이벤트일 경우
+					if (event.getText() == " ") {
+						event.setBackground(Color.white);
 						event.setText("");
 						map[i][j] = 0;
-					} else {
-						event.setBackground(new Color(42, 179, 231));
-						event.setText("■");
+					}
+					// 벽을 해제하는 이벤트일 경우
+					else {
+						event.setBackground(Color.LIGHT_GRAY);
+						event.setText(" ");
 						map[i][j] = 1;
 					}
 					
@@ -87,11 +95,11 @@ public class Frame extends JFrame {
 		return listener;
 	}
 
+	// invokeLater로 제일 마지막에 setVisible 설정
 	public void setView() {
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (Exception e) {
-		}
+		} catch (Exception e) { }
 		
 		EventQueue.invokeLater(new Runnable() {
 
@@ -102,33 +110,41 @@ public class Frame extends JFrame {
 		});
 	}
 	
+	// 알고리즘 실행 구문
 	public void solve() {
 		info = new MapInfo(deepCopy(map), row, col, start, end);
 		new AStar().start(info);
-		System.out.println("----------------");
-		printMap(info.maps);
-		
-		//벽 색깔 칠해주기
+		buttonColored();
+	}
+	
+	// 경로 버튼 색칠
+	private void buttonColored() {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				if (info.maps[i][j] == 2) {
-					btn[i][j].setBackground(Color.green);
+					btn[i][j].setBackground(new Color(165, 255, 146));
 				}
 				else if (info.maps[i][j] == 0){
-					btn[i][j].setBackground(null);
+					btn[i][j].setBackground(Color.white);
 				}
 			}
 		}
 		
-		btn[0][0].setBackground(Color.red);
+		pointButtonColored();
+	}
+	
+	// 출발지, 도착지 색칠
+	private void pointButtonColored() {
+		btn[0][0].setBackground(new Color(51, 102, 0));
 		btn[0][0].setText("[출발지]");
 		btn[0][0].setEnabled(false);
-		btn[9][9].setBackground(Color.red);
+		btn[9][9].setBackground(new Color(51, 102, 0));
 		btn[9][9].setText("[도착지]");
 		btn[9][9].setEnabled(false);
 	}
 	
-	private static int[][] deepCopy(int[][] arr) {
+	// info.maps와 frame 내의 map 깊은 복사 전용
+	private int[][] deepCopy(int[][] arr) {
         if(arr == null) return null;
         int[][] result = new int[arr.length][arr[0].length];
          
@@ -138,13 +154,4 @@ public class Frame extends JFrame {
          
         return result;
     }
-
-	public void printMap(int[][] maps) {
-		for (int i = 0; i < maps.length; i++) {
-			for (int j = 0; j < maps[i].length; j++) {
-				System.out.print(maps[i][j] + " ");
-			}
-			System.out.println();
-		}
-	}
 }
