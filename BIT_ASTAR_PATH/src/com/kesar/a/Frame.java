@@ -66,16 +66,6 @@ public class Frame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				//액션주기전에 Map초기화
-//				for (int i = 0; i < row; i++) {
-//					for (int j = 0; j < col; j++) {
-//						if (map[i][j] == 2) {
-//							map[i][j] = 0;
-//							btn[i][j].setBackground(null);
-//						}
-//					}
-//				}
-				
 				if (e.getSource() instanceof JButton) {
 					JButton event = (JButton) e.getSource();
 					if (event.getText() == "■") {
