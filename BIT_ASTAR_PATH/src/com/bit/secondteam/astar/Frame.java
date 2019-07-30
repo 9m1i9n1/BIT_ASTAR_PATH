@@ -122,7 +122,7 @@ public class Frame extends JFrame {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				if (info.maps[i][j] == 2) {
-					btn[i][j].setBackground(new Color(165, 255, 146));
+					btn[i][j].setBackground(new Color(153, 255, 51));
 				}
 				else if (info.maps[i][j] == 0){
 					btn[i][j].setBackground(Color.white);
@@ -135,10 +135,10 @@ public class Frame extends JFrame {
 	
 	// 출발지, 도착지 색칠
 	private void pointButtonColored() {
-		btn[0][0].setBackground(new Color(51, 102, 0));
+		btn[0][0].setBackground(new Color(204, 0, 0));
 		btn[0][0].setText("[출발지]");
 		btn[0][0].setEnabled(false);
-		btn[9][9].setBackground(new Color(51, 102, 0));
+		btn[9][9].setBackground(new Color(76, 153, 0));
 		btn[9][9].setText("[도착지]");
 		btn[9][9].setEnabled(false);
 	}
