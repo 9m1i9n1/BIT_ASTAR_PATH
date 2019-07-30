@@ -44,20 +44,13 @@ public class AStar {
 				break;
 			}
 
-//			for (Node node : openList) {
-//				System.out.println("x : " + node.coord.x + " y : " + node.coord.y);
-//			}
-//			System.out.println("================================");
-
 			// 도착지가 아니면, current에 현재 Node 위치를 가져온다. 
 			// G값을 기준으로 작은값 부터 처리해나간다.
 			Node current = openList.poll();
 
-//			System.out.println("Current x : " + current.coord.x + " y : " + current.coord.y);
-
 			// 현재노드는 지금기준으로 사용하므로 CloseList에 넣는다.
 			closeList.add(current);
-			// 인전노드에 대해서, 현재 가중치 g(x),휴리스틱 추정값 h(x)을 구한다.
+			// 인접노드에 대해서, 현재 가중치 g(x),휴리스틱 추정값 h(x)을 구한다.
 			addNeighborNodeInOpen(mapInfo, current);
 		}
 	}
@@ -71,7 +64,6 @@ public class AStar {
 		while (end != null) {
 			Coord c = end.coord;
 			maps[c.y][c.x] = PATH;
-//			System.out.println(end.coord.x + " " + end.coord.y);
 			end = end.parent;
 		}
 	}
@@ -110,7 +102,7 @@ public class AStar {
 			Node end = mapInfo.end;
 			Coord coord = new Coord(x, y);
 			int G = current.G + value; // 인접 접점의 G값 계산
-			// 제일 첫 시작시엔 인접노드들이 모두 OpneList에 없으므로 null이 Return한다.
+			// 제일 첫 시작시엔 인접노드들이 모두 OpenList에 없으므로 null이 Return된다.
 			Node child = findNodeInOpen(coord);
 			if (child == null) {
 				// 휴리스틱 추정치 h(x) 계산
@@ -129,7 +121,7 @@ public class AStar {
 				// 새로 생성된 Node객체는 OpenList에 추가.
 				openList.add(child);
 			}
-			// 이미 OpenList에 있는 Node 중 작은 값의 G는 불필요하므로 생략
+			// 이미 OpenList에 있는 Node 중 current의 G값보다 작은 값의 G는 불필요하므로 생략
 			// 가중치 G값을 현재 부모노드의 기준으로 다시 초기화.
 			// 이상하게 여기의 조건문은 안 들어간다.
 			else if (child.G > G) {
@@ -155,14 +147,14 @@ public class AStar {
 	}
 
 	/**
-	 * H값 계산：“맨하탄”방식，좌표별 추가
+	 * H값 계산：좌표별 추가
 	 */
 	private int calcH(Coord end, Coord coord) {
 		return Math.abs(end.x - coord.x) + Math.abs(end.y - coord.y);
 	}
 
 	/**
-	 * 마지막 노트인지 판단
+	 * 마지막 노드인지 판단
 	 */
 	private boolean isEndNode(Coord end, Coord coord) {
 		return coord != null && end.equals(coord);
@@ -172,7 +164,7 @@ public class AStar {
 	 * 노드를 Open에 넣을 수 있는지 판단
 	 */
 	private boolean canAddNodeToOpen(MapInfo mapInfo, int x, int y) {
-		// 맵 에 있는지 판단
+		// 맵 안에 있는지 판단
 		if (x < 0 || x >= mapInfo.width || y < 0 || y >= mapInfo.hight)
 			return false;
 		// 벽인지 판단

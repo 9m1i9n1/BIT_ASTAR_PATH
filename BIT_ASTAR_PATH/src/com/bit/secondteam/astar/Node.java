@@ -3,8 +3,8 @@ package com.bit.secondteam.astar;
 public class Node implements Comparable<Node>
 {
 
-	public Coord coord; // 좌표
-	public Node parent; // 부모 좌표
+	public Coord coord; // 좌표값
+	public Node parent; // 부모 좌표값
 	public int G; // G：(정확한값)，시작점과 현재점에 대한 비용
 	public int H; // H：(추정치)，현재점과 도착점에 대한 비용
 
