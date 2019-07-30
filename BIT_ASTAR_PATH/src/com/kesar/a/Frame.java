@@ -121,7 +121,6 @@ public class Frame extends JFrame {
 	public void solve() {
 		info = new MapInfo(map, row, col, start, end);
 		new AStar().start(info);
-		printMap(map);
 		System.out.println("----------------");
 		printMap(info.maps);
 		
@@ -129,23 +128,18 @@ public class Frame extends JFrame {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				if (map[i][j] == 2) {
-					btn[i][j].setBackground(Color.blue);
+					btn[i][j].setBackground(Color.green);
 				}
 			}
 		}
 	}
 
-	public static void printMap(int[][] maps) {
+	public void printMap(int[][] maps) {
 		for (int i = 0; i < maps.length; i++) {
 			for (int j = 0; j < maps[i].length; j++) {
 				System.out.print(maps[i][j] + " ");
 			}
 			System.out.println();
-		}
-	}
-
-	public void clean() {
-		for (JButton item : colored) {
 		}
 	}
 

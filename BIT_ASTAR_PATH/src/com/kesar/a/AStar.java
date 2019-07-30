@@ -47,16 +47,16 @@ public class AStar {
 				break;
 			}
 
-			for (Node node : openList) {
-				System.out.println("x : " + node.coord.x + " y : " + node.coord.y);
-			}
-			System.out.println("================================");
+//			for (Node node : openList) {
+//				System.out.println("x : " + node.coord.x + " y : " + node.coord.y);
+//			}
+//			System.out.println("================================");
 
-			// 도착지가 아니면, current에 현재 Node 위치를 가져온다.
+			// 도착지가 아니면, current에 현재 Node 위치를 가져온다. 
 			// G값을 기준으로 작은값 부터 처리해나간다.
 			Node current = openList.poll();
 
-			System.out.println("Current x : " + current.coord.x + " y : " + current.coord.y);
+//			System.out.println("Current x : " + current.coord.x + " y : " + current.coord.y);
 
 			// 현재노드는 지금기준으로 사용하므로 CloseList에 넣는다.
 			closeList.add(current);
@@ -74,7 +74,7 @@ public class AStar {
 		while (end != null) {
 			Coord c = end.coord;
 			maps[c.y][c.x] = PATH;
-			System.out.println(end.coord.x + " " + end.coord.y);
+//			System.out.println(end.coord.x + " " + end.coord.y);
 			end = end.parent;
 		}
 	}
