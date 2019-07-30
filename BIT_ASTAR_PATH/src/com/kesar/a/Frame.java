@@ -73,17 +73,27 @@ public class Frame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				for (int i = 0; i < row; i++) {
+					for (int j = 0; j < col; j++) {
+						if (map[i][j] == 2) {
+							map[i][j] = 0;
+							btn[i][j].setBackground(null);
+						}
+					}
+				}
+				
 				if (e.getSource() instanceof JButton) {
 					JButton event = (JButton) e.getSource();
-					if (event.getText() == "[벽]") {
+					if (event.getText() == "■") {
 						event.setBackground(null);
 						event.setText("");
 						map[i][j] = 0;
 					} else {
 						event.setBackground(new Color(42, 179, 231));
-						event.setText("[벽]");
+						event.setText("■");
 						map[i][j] = 1;
-					}					
+					}
+					
 					solve();
 				}
 			}
@@ -115,7 +125,7 @@ public class Frame extends JFrame {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				if (map[i][j] == 2) {
-					map[i][j] = 0;
+					btn[i][j].setBackground(Color.blue);
 				}
 			}
 		}
