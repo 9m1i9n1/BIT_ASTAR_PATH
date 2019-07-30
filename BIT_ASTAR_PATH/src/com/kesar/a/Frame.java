@@ -110,6 +110,8 @@ public class Frame extends JFrame {
 	public void solve() {
 		info = new MapInfo(map, row, col, start, end);
 		new AStar().start(info);
+		printMap(map);
+		System.out.println("----------------");
 		printMap(info.maps);
 	}
 
