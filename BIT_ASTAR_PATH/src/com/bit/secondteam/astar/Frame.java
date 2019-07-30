@@ -1,4 +1,4 @@
-package com.kesar.a;
+package com.bit.secondteam.astar;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -62,8 +62,9 @@ public class Frame extends JFrame {
 	}
 
 	public ActionListener btn_listner(int i, int j) {
+		
 		ActionListener listener = new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() instanceof JButton) {
@@ -145,9 +146,5 @@ public class Frame extends JFrame {
 			}
 			System.out.println();
 		}
-	}
-
-	public int[][] getMap() {
-		return map;
 	}
 }

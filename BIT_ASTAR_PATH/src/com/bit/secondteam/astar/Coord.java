@@ -1,11 +1,5 @@
-package com.kesar.a;
-/**
- * 
- * ClassName: Coord
- * 
- * @Description: 坐标
- * @author kesar
- */
+package com.bit.secondteam.astar;
+
 public class Coord
 {
 

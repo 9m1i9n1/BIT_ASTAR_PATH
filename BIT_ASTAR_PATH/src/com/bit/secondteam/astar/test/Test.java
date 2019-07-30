@@ -1,6 +1,6 @@
-package com.kesar.a.test;
+package com.bit.secondteam.astar.test;
 
-import com.kesar.a.*;
+import com.bit.secondteam.astar.*;
 
 public class Test
 {

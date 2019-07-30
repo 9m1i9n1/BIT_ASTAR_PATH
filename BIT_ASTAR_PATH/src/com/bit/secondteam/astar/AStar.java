@@ -1,17 +1,10 @@
-package com.kesar.a;
+package com.bit.secondteam.astar;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-/**
- * 
- * ClassName: AStar
- * 
- * @Description: A星算法
- * @author kesar
- */
 public class AStar {
 	public final static int BAR = 1; // 벽 값
 	public final static int PATH = 2; // 경로
