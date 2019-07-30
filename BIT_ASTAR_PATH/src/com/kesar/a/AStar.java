@@ -89,22 +89,31 @@ public class AStar
 	{
 		int x = current.coord.x;
 		int y = current.coord.y;
-		// 좌측
-		addNeighborNodeInOpen(mapInfo,current, x - 1, y, DIRECT_VALUE);
-		// 아래
-		addNeighborNodeInOpen(mapInfo,current, x, y - 1, DIRECT_VALUE);
-		// 우측
-		addNeighborNodeInOpen(mapInfo,current, x + 1, y, DIRECT_VALUE);
-		// 위
-		addNeighborNodeInOpen(mapInfo,current, x, y + 1, DIRECT_VALUE);
-		// 좌측하단
-		addNeighborNodeInOpen(mapInfo,current, x - 1, y - 1, OBLIQUE_VALUE);
-		// 우측하단
-		addNeighborNodeInOpen(mapInfo,current, x + 1, y - 1, OBLIQUE_VALUE);
-		// 우측상단
-		addNeighborNodeInOpen(mapInfo,current, x + 1, y + 1, OBLIQUE_VALUE);
-		// 좌측상단
-		addNeighborNodeInOpen(mapInfo,current, x - 1, y + 1, OBLIQUE_VALUE);
+		if (x == 0 && y == 0) {
+			// 아래
+			addNeighborNodeInOpen(mapInfo,current, x, y - 1, DIRECT_VALUE);
+			// 우측
+			addNeighborNodeInOpen(mapInfo,current, x + 1, y, DIRECT_VALUE);
+			// 우측하단
+			addNeighborNodeInOpen(mapInfo,current, x + 1, y - 1, OBLIQUE_VALUE);
+		}else {
+			// 좌측
+			addNeighborNodeInOpen(mapInfo,current, x - 1, y, DIRECT_VALUE);
+			// 아래
+			addNeighborNodeInOpen(mapInfo,current, x, y - 1, DIRECT_VALUE);
+			// 우측
+			addNeighborNodeInOpen(mapInfo,current, x + 1, y, DIRECT_VALUE);
+			// 위
+			addNeighborNodeInOpen(mapInfo,current, x, y + 1, DIRECT_VALUE);
+			// 좌측하단
+			addNeighborNodeInOpen(mapInfo,current, x - 1, y - 1, OBLIQUE_VALUE);
+			// 우측하단
+			addNeighborNodeInOpen(mapInfo,current, x + 1, y - 1, OBLIQUE_VALUE);
+			// 우측상단
+			addNeighborNodeInOpen(mapInfo,current, x + 1, y + 1, OBLIQUE_VALUE);
+			// 좌측상단
+			addNeighborNodeInOpen(mapInfo,current, x - 1, y + 1, OBLIQUE_VALUE);
+		}
 	}
 
 	/**
